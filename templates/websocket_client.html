@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Кибер-Спектр</title>
+  <link rel="stylesheet" href="/static/websocket_style.css">
+  <script>
+    let ws = new WebSocket("ws://localhost:9002");
+    ws.onmessage = function(event) {
+      let log = document.getElementById("log");
+      log.innerHTML += `<p>${event.data}</p>`;
+    };
+    function send() {
+      let msg = document.getElementById("msg").value;
+      ws.send(msg);
+      document.getElementById("msg").value = '';
+    }
+  </script>
+</head>
+<body>
+  <h1 style="color:#f8f8ff">AR Мониторинг аномалий</h1>
+  <input id="msg" type="text" placeholder="Сообщение">
+  <button onclick="send()">Отправить</button>
+  <div id="log" style="margin-top:20px; border:1px solid #ccc; padding:10px;"></div>
+</body>
+</html>
